@@ -50,6 +50,8 @@ public class Check {
         }
 
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("§d").append(name).append(" §7(").append(id).append(")\n§r\n");
+
         for(String s : data) {
             if (!s.contains("=")) {
                 throw new IllegalArgumentException("Data does not contain '='!");
@@ -64,13 +66,14 @@ public class Check {
             }
         }
 
-        stringBuilder.append("\n");
+        stringBuilder.append("§r\n");
         stringBuilder.append("§dVL:§7 ").append(vl).append("/").append(maxVL);
+        stringBuilder.append("§dPing:§7 ").append(user.getPing()).append("ms");
 
-        stringBuilder.append("\n");
+        stringBuilder.append("§r\n");
         stringBuilder.append("§7Click to teleport to player!");
 
-        TextComponent.Builder message = Component.text(String.format("%s§d%s §7failed §d%s §7(§d%s§7) §7[%sms]", ChatUtil.getPrefix(), user.getPlayer().getName(), name, id, user.getPing()))
+        TextComponent.Builder message = Component.text(String.format("%s§d%s §7failed §d%s §7(§d%s§7) §7[§d%s§7ms]", ChatUtil.getPrefix(), user.getPlayer().getName(), name, id, user.getPing()))
                 .hoverEvent(Component.text(stringBuilder.toString()))
                 .clickEvent(ClickEvent.runCommand("/tp " + user.getPlayer().getName()))
                 .toBuilder();
