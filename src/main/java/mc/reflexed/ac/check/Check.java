@@ -1,6 +1,7 @@
 package mc.reflexed.ac.check;
 
 import lombok.Getter;
+import mc.reflexed.ac.AntiCheatConsumer;
 import mc.reflexed.ac.ReflexedAC;
 import mc.reflexed.ac.check.data.CheckInfo;
 import mc.reflexed.ac.check.data.CheckType;
@@ -85,6 +86,10 @@ public class Check {
                 .toBuilder();
 
         ChatUtil.broadcast(message.build(), true);
+
+        if(vl >= maxVL) {
+            ReflexedAC.getInstance().getAntiCheatConsumer().punish(user.getPlayer());
+        }
     }
 
     public final void register(User user) {
