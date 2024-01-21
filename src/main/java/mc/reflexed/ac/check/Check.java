@@ -52,6 +52,7 @@ public class Check {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("§d").append(name).append(" §7(").append(id).append(")\n§r\n");
 
+        stringBuilder.append("§dCheck Data:§7\n: ");
         for(String s : data) {
             if (!s.contains("=")) {
                 throw new IllegalArgumentException("Data does not contain '='!");
@@ -59,7 +60,7 @@ public class Check {
 
             String[] split = s.split("=");
 
-            stringBuilder.append("§d").append(split[0]).append(":§7 ").append(split[1]);
+            stringBuilder.append("  ").append("§d• ").append(split[0]).append(":§7 ").append(split[1]);
 
             if(!s.equals(data[data.length - 1])) {
                 stringBuilder.append("\n§r");
@@ -67,8 +68,13 @@ public class Check {
         }
 
         stringBuilder.append("\n§r\n");
-        stringBuilder.append("§dVL:§7 ").append(vl).append("/").append(maxVL).append("\n");
-        stringBuilder.append("§dPing:§7 ").append(user.getPing()).append("ms");
+        stringBuilder.append("§dUser Info:§7 ").append(user.getPlayer().getName()).append("\n")
+                .append("  ").append("§d• Ping:§7 ").append(user.getPing()).append("ms");
+
+        stringBuilder.append("\n§r\n");
+        stringBuilder.append("§dCheck Info:§7\n")
+                .append("  ").append("§d• Type:§7 ").append(type.name()).append("\n")
+                .append("  ").append("§d• VL:§7 ").append(vl).append("/").append(maxVL);
 
         stringBuilder.append("\n§r\n");
         stringBuilder.append("§7Click to teleport to player!");
