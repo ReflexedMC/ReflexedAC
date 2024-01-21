@@ -9,6 +9,7 @@ import mc.reflexed.ac.util.ChatUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
+import net.md_5.bungee.api.chat.HoverEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.units.qual.C;
@@ -69,12 +70,12 @@ public class Check {
         stringBuilder.append("\n");
         stringBuilder.append("§7Click to teleport to player!");
 
-        TextComponent.Builder builder = Component.text(String.format("§d%s §7failed §d%s §7(§d%s§7) §7[%sms]", user.getPlayer().getName(), name, id, user.getPing()))
+        TextComponent.Builder message = Component.text(String.format("%s§d%s §7failed §d%s §7(§d%s§7) §7[%sms]", ChatUtil.getPrefix(), user.getPlayer().getName(), name, id, user.getPing()))
                 .hoverEvent(Component.text(stringBuilder.toString()))
                 .clickEvent(ClickEvent.runCommand("/tp " + user.getPlayer().getName()))
                 .toBuilder();
 
-        ChatUtil.broadcast(builder.build(), true);
+        ChatUtil.broadcast(message.build(), true);
     }
 
     public final void register(User user) {

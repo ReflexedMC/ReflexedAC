@@ -20,10 +20,6 @@ public class ChatUtil {
     }
 
     public void broadcast(Component component, boolean permission) {
-        String message = PlainTextComponentSerializer.plainText().serialize(component);
-
-        String prefix = "§dReflexedAC §7» ";
-
         AntiCheatConsumer consumer = ReflexedAC.getInstance().getAntiCheatConsumer();
 
         for(Player player : Bukkit.getOnlinePlayers()) {
@@ -31,8 +27,12 @@ public class ChatUtil {
                 continue;
             }
 
-            player.sendMessage(Component.text(prefix + message));
+            player.sendMessage(component);
         }
+    }
+
+    public String getPrefix() {
+        return "§dReflexedAC §7» ";
     }
 
 }
