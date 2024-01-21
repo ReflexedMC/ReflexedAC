@@ -68,13 +68,13 @@ public class Check {
         }
 
         stringBuilder.append("\n§r\n");
-        stringBuilder.append("§dUser Info:§7 ").append(user.getPlayer().getName()).append("\n")
-                .append("  ").append("§7• Ping: ").append(user.getPing()).append("ms");
+        stringBuilder.append("§dCheck Info:§7\n")
+                .append("  ").append("§7• Type:§r ").append(type.name()).append("\n")
+                .append("  ").append("§7• VL:§r ").append(vl).append("/").append(maxVL);
 
         stringBuilder.append("\n§r\n");
-        stringBuilder.append("§dCheck Info:§7\n")
-                .append("  ").append("§7• Type: ").append(type.name()).append("\n")
-                .append("  ").append("§7• VL: ").append(vl).append("/").append(maxVL);
+        stringBuilder.append("§dUser Info:§r ").append(user.getPlayer().getName()).append("\n")
+                .append("  ").append("§7• Ping: ").append(user.getPing()).append("ms");
 
         stringBuilder.append("\n§r\n");
         stringBuilder.append("§7Click to teleport to player!");
