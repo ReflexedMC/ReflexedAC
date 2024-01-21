@@ -21,8 +21,8 @@ public class Check {
     protected final String name;
     protected final String description;
     protected final CheckType type;
-    private final int maxVL;
 
+    private final int maxVL;
     private int vl;
 
     public Check() {

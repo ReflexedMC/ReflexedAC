@@ -27,7 +27,7 @@ public class CheckManager {
         }
     }
 
-    public void addChecks(Class<?>... checks) {
+    public static void addChecks(Class<?>... checks) {
         classes.addAll(Arrays.asList(checks));
     }
 

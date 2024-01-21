@@ -10,6 +10,7 @@ import java.lang.annotation.Target;
 public @interface CheckInfo {
     String name();
     String description() default "No description provided.";
+    String value() default "A";
     CheckType type() default CheckType.NORMAL;
     int maxVl() default 10;
 }
