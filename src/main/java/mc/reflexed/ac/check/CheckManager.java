@@ -13,8 +13,8 @@ public class CheckManager {
 
     public void register(User user) {
         for(Class<?> clazz : classes) {
-            if(!clazz.isAssignableFrom(Check.class)) {
-                throw new RuntimeException("Class " + clazz.getName() + " is not a check!");
+            if(!Check.class.isAssignableFrom(clazz)) {
+                throw new RuntimeException("Class " + clazz.getName() + " does not extend Check!");
             }
 
             try {
