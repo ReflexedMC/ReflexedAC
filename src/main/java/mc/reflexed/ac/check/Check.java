@@ -20,6 +20,7 @@ public class Check {
 
     protected final String name;
     protected final String description;
+    protected final String id;
     protected final CheckType type;
 
     private final int maxVL;
@@ -34,6 +35,7 @@ public class Check {
 
         this.name = checkInfo.name();
         this.description = checkInfo.description();
+        this.id = checkInfo.value();
         this.type = checkInfo.type();
         this.maxVL = checkInfo.maxVl();
     }
@@ -45,7 +47,7 @@ public class Check {
             throw new NullPointerException("Player is null!");
         }
 
-        ChatUtil.broadcast(String.format("§c%s §7failed §c%s §7[§c%s§7]", player.getName(), name, vl), true);
+        ChatUtil.broadcast(String.format("§d%s §7failed §d%s §7(§d%s§7) §7[%sms]", player.getName(), name, id, User.get(player).getPing()), true);
     }
 
     public final void register(User user) {

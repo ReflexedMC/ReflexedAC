@@ -15,7 +15,7 @@ public class ChatUtil {
     }
 
     public void broadcast(String message, boolean permission) {
-        String prefix = "§7[§dReflexed§7]§r ";
+        String prefix = "§dReflexedAC §7» ";
 
         AntiCheatConsumer consumer = ReflexedAC.getInstance().getAntiCheatConsumer();
 
