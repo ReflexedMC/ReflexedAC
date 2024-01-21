@@ -42,7 +42,11 @@ public class User {
 
     public int getPing() {
         try {
-            return player.getClass().getDeclaredField("ping").getInt(player);
+            Method getHandle = player.getClass().getDeclaredMethod("getHandle");
+            Object entityPlayer = getHandle.invoke(player);
+
+            Method getPing = entityPlayer.getClass().getDeclaredMethod("getPing");
+            return (int) getPing.invoke(entityPlayer);
         } catch (Exception e) {
             e.printStackTrace();
         }

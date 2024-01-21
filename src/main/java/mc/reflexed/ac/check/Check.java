@@ -16,11 +16,9 @@ import java.lang.reflect.Field;
 @Getter
 public class Check {
 
-    protected Player player = null;
+    protected User user = null;
 
-    protected final String name;
-    protected final String description;
-    protected final String id;
+    protected final String name, description, id;
     protected final CheckType type;
 
     private final int maxVL;
@@ -43,15 +41,15 @@ public class Check {
     protected void flag() {
         vl++;
 
-        if(player == null) {
+        if(user == null) {
             throw new NullPointerException("Player is null!");
         }
 
-        ChatUtil.broadcast(String.format("§d%s §7failed §d%s §7(§d%s§7) §7[%sms]", player.getName(), name, id, User.get(player).getPing()), true);
+        ChatUtil.broadcast(String.format("§d%s §7failed §d%s §7(§d%s§7) §7[%sms]", user.getPlayer().getName(), name, id, user.getPing()), true);
     }
 
     public final void register(User user) {
-        this.player = user.getPlayer();
+        this.user = user;
     }
 
     public void unregister() {
