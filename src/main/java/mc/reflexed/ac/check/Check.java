@@ -87,7 +87,7 @@ public class Check {
 
         ChatUtil.broadcast(message.build(), true);
 
-        if(vl >= maxVL) {
+        if(vl >= maxVL && type != CheckType.EXPERIMENTAL) {
             ReflexedAC.getInstance().getAntiCheatConsumer().punish(user.getPlayer());
         }
     }
