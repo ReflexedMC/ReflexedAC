@@ -62,7 +62,7 @@ public class Check {
             stringBuilder.append("§d").append(split[0]).append(":§7 ").append(split[1]);
 
             if(!s.equals(data[data.length - 1])) {
-                stringBuilder.append("\n§r\n");
+                stringBuilder.append("\n§r");
             }
         }
 
