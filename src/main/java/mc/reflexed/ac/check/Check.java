@@ -52,7 +52,7 @@ public class Check {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("§d").append(name).append(" §7(§d").append(id).append("§7)\n§r\n");
 
-        stringBuilder.append("§dCheck Data:§7: ");
+        stringBuilder.append("§dCheck Data:§7:").append("\n");
         for(String s : data) {
             if (!s.contains("=")) {
                 throw new IllegalArgumentException("Data does not contain '='!");
