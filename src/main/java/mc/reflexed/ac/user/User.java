@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import mc.reflexed.ac.ReflexedAC;
 import mc.reflexed.ac.check.Check;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.Field;
@@ -42,16 +43,16 @@ public class User {
 
     public int getPing() {
         try {
-            Method getHandle = player.getClass().getDeclaredMethod("getHandle");
-            Object entityPlayer = getHandle.invoke(player);
+            if(player == null) {
+                throw new NullPointerException("Player is null!");
+            }
 
-            Method getPing = entityPlayer.getClass().getDeclaredMethod("getPing");
-            return (int) getPing.invoke(entityPlayer);
+            return player.getPing();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return -1;
+        return -1; // failed to get ping
     }
 
     public static User get(Player player) {
