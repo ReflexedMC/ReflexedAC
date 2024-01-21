@@ -1,29 +1,34 @@
 package mc.reflexed.ac.check;
 
-import mc.reflexed.ac.check.checks.TestCheck;
+import lombok.Getter;
+import mc.reflexed.ac.ReflexedAC;
 import mc.reflexed.ac.user.User;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CheckManager {
 
-    private final Class<?>[] classes = new Class<?>[] {
-            TestCheck.class
-    };
+    @Getter
+    private static List<Class<?>> classes = new ArrayList<>();
 
     public void register(User user) {
         for(Class<?> clazz : classes) {
-            if(!Check.class.isAssignableFrom(clazz)) {
-                throw new RuntimeException("Class " + clazz.getName() + " does not extend Check!");
-            }
-
             try {
                 Check check = (Check) clazz.getDeclaredConstructors()[0].newInstance();
                 user.registerCheck(check);
+
+                ReflexedAC.getInstance().getEventManager().register(check, user.getPlayer());
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void addChecks(Class<?>... checks) {
+        classes.addAll(Arrays.asList(checks));
     }
 
 }

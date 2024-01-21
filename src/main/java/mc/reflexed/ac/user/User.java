@@ -27,7 +27,7 @@ public class User {
 
     public void register() {
         users.add(this);
-        ReflexedAC.INSTANCE.getCheckManager().register(this);
+        ReflexedAC.getInstance().getCheckManager().register(this);
     }
 
     public void unregister() {

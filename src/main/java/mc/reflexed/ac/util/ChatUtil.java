@@ -1,16 +1,31 @@
 package mc.reflexed.ac.util;
 
 import lombok.experimental.UtilityClass;
+import mc.reflexed.ac.AntiCheatConsumer;
+import mc.reflexed.ac.ReflexedAC;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 @UtilityClass
 public class ChatUtil {
 
-    public void broadcast(String message, String permission) {
-        String prefix = "§8[§cReflexed§8] ";
+    public void broadcast(String message) {
+        broadcast(message, false);
+    }
 
-        Bukkit.broadcast(Component.text(prefix + message), permission);
+    public void broadcast(String message, boolean permission) {
+        String prefix = "§7[§dReflexed§7]§r ";
+
+        AntiCheatConsumer consumer = ReflexedAC.getInstance().getAntiCheatConsumer();
+
+        for(Player player : Bukkit.getOnlinePlayers()) {
+            if(permission && !consumer.accept(player)) {
+                continue;
+            }
+
+            player.sendMessage(Component.text(prefix + message));
+        }
     }
 
 }

@@ -11,45 +11,41 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.lang.reflect.Method;
+import java.util.function.Consumer;
 
 @Getter
-public enum ReflexedAC {
-    INSTANCE;
+public class ReflexedAC {
+
+    @Getter
+    public static ReflexedAC instance;
 
     private final EventManager eventManager;
     private final CheckManager checkManager;
 
-    ReflexedAC() {
-        this.eventManager = getRegisteredEventManager();
+    private final AntiCheatConsumer antiCheatConsumer;
+
+    public ReflexedAC(EventManager eventManager, AntiCheatConsumer antiCheatConsumer) {
+        if(instance != null) {
+            throw new RuntimeException("ReflexedAC instance already exists!");
+        }
+
+        instance = this;
+        this.eventManager = eventManager;
+        this.antiCheatConsumer = antiCheatConsumer;
         this.checkManager = new CheckManager();
         this.eventManager.register(this);
+
+        ChatUtil.broadcast("ReflexedAC has been enabled!");
     }
 
     @EventInfo
     public void onJoin(PlayerJoinEvent event) {
         User.get(event.getPlayer()).register();
-        ChatUtil.broadcast("User " + event.getPlayer().getName() + " has joined!", "reflexed.admin");
     }
 
     @EventInfo
     public void onQuit(PlayerQuitEvent event) {
         User.get(event.getPlayer()).unregister();
-        ChatUtil.broadcast("User " + event.getPlayer().getName() + " has left!", "reflexed.admin");
     }
 
-    private EventManager getRegisteredEventManager() {
-        try {
-            Class<?> mainClass = Class.forName("mc.reflexed.Reflexed");
-            Method get = mainClass.getMethod("get");
-
-            Object instance = get.invoke(null);
-            Method getEventManager = mainClass.getMethod("getEventManager");
-
-            return (EventManager) getEventManager.invoke(instance);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        throw new RuntimeException("Failed to get EventManager!");
-    }
 }

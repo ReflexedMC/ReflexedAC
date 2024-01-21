@@ -45,14 +45,14 @@ public class Check {
             throw new NullPointerException("Player is null!");
         }
 
-        ChatUtil.broadcast(String.format("§c%s §7failed §c%s §7[§c%s§7]", player.getName(), name, vl), "reflexed.staff");
+        ChatUtil.broadcast(String.format("§c%s §7failed §c%s §7[§c%s§7]", player.getName(), name, vl), true);
     }
 
     public final void register(User user) {
-        ReflexedAC.INSTANCE.getEventManager().register(this, this.player = user.getPlayer());
+        this.player = user.getPlayer();
     }
 
     public void unregister() {
-        ReflexedAC.INSTANCE.getEventManager().unregister(this);
+        ReflexedAC.getInstance().getEventManager().unregister(this);
     }
 }
