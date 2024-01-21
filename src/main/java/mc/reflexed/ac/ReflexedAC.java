@@ -3,8 +3,10 @@ package mc.reflexed.ac;
 import lombok.Getter;
 import mc.reflexed.ac.check.CheckManager;
 import mc.reflexed.ac.user.User;
+import mc.reflexed.ac.util.ChatUtil;
 import mc.reflexed.event.EventManager;
 import mc.reflexed.event.data.EventInfo;
+import org.bukkit.Bukkit;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -25,12 +27,14 @@ public enum ReflexedAC {
 
     @EventInfo
     public void onJoin(PlayerJoinEvent event) {
-       User.get(event.getPlayer()).register();
+        User.get(event.getPlayer()).register();
+        ChatUtil.broadcast("User " + event.getPlayer().getName() + " has joined!", "reflexed.admin");
     }
 
     @EventInfo
     public void onQuit(PlayerQuitEvent event) {
         User.get(event.getPlayer()).unregister();
+        ChatUtil.broadcast("User " + event.getPlayer().getName() + " has left!", "reflexed.admin");
     }
 
     private EventManager getRegisteredEventManager() {
