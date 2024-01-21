@@ -62,15 +62,15 @@ public class Check {
             stringBuilder.append("§d").append(split[0]).append(":§7 ").append(split[1]);
 
             if(!s.equals(data[data.length - 1])) {
-                stringBuilder.append("\n");
+                stringBuilder.append("\n§r\n");
             }
         }
 
-        stringBuilder.append("§r\n");
-        stringBuilder.append("§dVL:§7 ").append(vl).append("/").append(maxVL);
+        stringBuilder.append("\n§r\n");
+        stringBuilder.append("§dVL:§7 ").append(vl).append("/").append(maxVL).append("\n");
         stringBuilder.append("§dPing:§7 ").append(user.getPing()).append("ms");
 
-        stringBuilder.append("§r\n");
+        stringBuilder.append("\n§r\n");
         stringBuilder.append("§7Click to teleport to player!");
 
         TextComponent.Builder message = Component.text(String.format("%s§d%s §7failed §d%s §7(§d%s§7) §7[§d%s§7ms]", ChatUtil.getPrefix(), user.getPlayer().getName(), name, id, user.getPing()))
