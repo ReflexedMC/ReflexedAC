@@ -38,7 +38,7 @@ public class ReflexedAC {
         this.eventManager.register(this);
 
         Bukkit.getOnlinePlayers().forEach(player -> User.get(player).register()); // player's that are already online
-        ChatUtil.broadcast("ReflexedAC has been enabled!");
+        ChatUtil.broadcast(ChatUtil.getPrefix() + "ReflexedAC has been enabled!");
     }
 
     @EventInfo
