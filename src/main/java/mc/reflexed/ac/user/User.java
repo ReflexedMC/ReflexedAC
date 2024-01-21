@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Getter @Setter
@@ -26,10 +27,12 @@ public class User {
 
     public void register() {
         users.add(this);
+        ReflexedAC.INSTANCE.getCheckManager().register(this);
     }
 
     public void unregister() {
         users.remove(this);
+        checks.forEach(Check::unregister);
     }
 
     public void registerCheck(Check check) {

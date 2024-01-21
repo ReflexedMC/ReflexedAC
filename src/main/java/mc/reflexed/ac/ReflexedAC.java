@@ -1,6 +1,7 @@
 package mc.reflexed.ac;
 
 import lombok.Getter;
+import mc.reflexed.ac.check.CheckManager;
 import mc.reflexed.ac.user.User;
 import mc.reflexed.event.EventManager;
 import mc.reflexed.event.data.EventInfo;
@@ -14,9 +15,11 @@ public enum ReflexedAC {
     INSTANCE;
 
     private final EventManager eventManager;
+    private final CheckManager checkManager;
 
     ReflexedAC() {
         this.eventManager = getRegisteredEventManager();
+        this.checkManager = new CheckManager();
         this.eventManager.register(this);
     }
 

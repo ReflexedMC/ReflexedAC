@@ -52,4 +52,7 @@ public class Check {
         ReflexedAC.INSTANCE.getEventManager().register(this, this.player = user.getPlayer());
     }
 
+    public void unregister() {
+        ReflexedAC.INSTANCE.getEventManager().unregister(this);
+    }
 }
