@@ -4,6 +4,7 @@ import lombok.experimental.UtilityClass;
 import mc.reflexed.ac.AntiCheatConsumer;
 import mc.reflexed.ac.ReflexedAC;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -15,6 +16,12 @@ public class ChatUtil {
     }
 
     public void broadcast(String message, boolean permission) {
+        broadcast(Component.text(message), permission);
+    }
+
+    public void broadcast(Component component, boolean permission) {
+        String message = PlainTextComponentSerializer.plainText().serialize(component);
+
         String prefix = "§dReflexedAC §7» ";
 
         AntiCheatConsumer consumer = ReflexedAC.getInstance().getAntiCheatConsumer();

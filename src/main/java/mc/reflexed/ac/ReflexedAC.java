@@ -7,10 +7,12 @@ import mc.reflexed.ac.util.ChatUtil;
 import mc.reflexed.event.EventManager;
 import mc.reflexed.event.data.EventInfo;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.function.Consumer;
 
 @Getter
@@ -35,6 +37,7 @@ public class ReflexedAC {
         this.checkManager = new CheckManager();
         this.eventManager.register(this);
 
+        Bukkit.getOnlinePlayers().forEach(player -> User.get(player).register()); // player's that are already online
         ChatUtil.broadcast("ReflexedAC has been enabled!");
     }
 

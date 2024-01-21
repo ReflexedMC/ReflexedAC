@@ -7,8 +7,11 @@ import mc.reflexed.ac.check.data.CheckType;
 import mc.reflexed.ac.user.User;
 import mc.reflexed.ac.util.ChatUtil;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.event.ClickEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.checkerframework.checker.units.qual.C;
 
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
@@ -38,14 +41,40 @@ public class Check {
         this.maxVL = checkInfo.maxVl();
     }
 
-    protected void flag() {
+    protected void flag(String... data) {
         vl++;
 
         if(user == null) {
             throw new NullPointerException("Player is null!");
         }
 
-        ChatUtil.broadcast(String.format("§d%s §7failed §d%s §7(§d%s§7) §7[%sms]", user.getPlayer().getName(), name, id, user.getPing()), true);
+        StringBuilder stringBuilder = new StringBuilder();
+        for(String s : data) {
+            if (!s.contains("=")) {
+                throw new IllegalArgumentException("Data does not contain '='!");
+            }
+
+            String[] split = s.split("=");
+
+            stringBuilder.append("§d").append(split[0]).append(":§7 ").append(split[1]);
+
+            if(!s.equals(data[data.length - 1])) {
+                stringBuilder.append("\n");
+            }
+        }
+
+        stringBuilder.append("\n");
+        stringBuilder.append("§dVL:§7 ").append(vl).append("/").append(maxVL);
+
+        stringBuilder.append("\n");
+        stringBuilder.append("§7Click to teleport to player!");
+
+        TextComponent.Builder builder = Component.text(String.format("§d%s §7failed §d%s §7(§d%s§7) §7[%sms]", user.getPlayer().getName(), name, id, user.getPing()))
+                .hoverEvent(Component.text(stringBuilder.toString()))
+                .clickEvent(ClickEvent.runCommand("/tp " + user.getPlayer().getName()))
+                .toBuilder();
+
+        ChatUtil.broadcast(builder.build(), true);
     }
 
     public final void register(User user) {
